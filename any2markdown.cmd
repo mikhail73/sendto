@@ -5,6 +5,7 @@ if "%~1"=="" goto continue
   set ext=%ext:~1%
   set source=%1
   if %ext%==xhtml set ext=html
+  if %ext%==shtml set ext=html
   if %ext%==htm set ext=html
   if %ext%==rtf (soffice --headless --convert-to odt %1)&&(set ext=odt)&&(set source="%~dpn1.odt")
   pandoc --wrap=none --atx-headers -s -f %ext% -w markdown_mmd+yaml_metadata_block+pipe_tables-raw_html-mmd_header_identifiers -o "%~dpn1%~x1.md"  %source%
